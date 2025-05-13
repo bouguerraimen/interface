@@ -15,6 +15,21 @@ socket.on('connect', () => {
 socket.on('connect_error', (err) => {
   console.error('❌ Erreur de connexion SocketIO :', err.message);
 });
+socket.on('connect', () => {
+  console.log('✅ Connecté au backend');
+});
+
+socket.on('connect_error', (err) => {
+  console.error('❌ Erreur de connexion WebSocket:', err.message);
+});
+
+// Envoi de la commande vers le backend
+const sendCommand = (command) => {
+  socket.emit('send_command', { command });
+};
+
+// Exemple d'envoi d'une commande
+sendCommand('bonjour');
 
 const Dictaphone = () => {
   const {
