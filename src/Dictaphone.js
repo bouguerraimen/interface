@@ -5,7 +5,7 @@ import './Dictaphone.css';
 import mic from './assets/mic.png'; // si le fichier est à src/assets/mic.jpg
 
 
-const socket = io('https://back-3pxi.onrender.com');
+const socket = io('https://back-3pxi.onrender.com/');
 
 const Dictaphone = () => {
   const {
