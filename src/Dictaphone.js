@@ -5,7 +5,8 @@ import './Dictaphone.css';
 import mic from './assets/mic.png'; // si le fichier est à src/assets/mic.jpg
 
 
-const socket = io('http://localhost:5000');
+const socket = io('https://flasksocketapp.onrender.com/ 
+flasksocketapp.onrender.com');
 
 const Dictaphone = () => {
   const {
