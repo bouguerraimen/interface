@@ -23,8 +23,8 @@ const Dictaphone = () => {
 
   // Détection du mot-clé "bottle"
   useEffect(() => {
-    if (transcript.toLowerCase().includes('bottle')) {
-      sendCommandToFlask("bottle");
+    if (transcript.toLowerCase().includes('bonjour')) {
+      sendCommandToFlask("bonjour");
       resetTranscript();
     }
   }, [transcript]);
