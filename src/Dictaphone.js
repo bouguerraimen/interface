@@ -2,8 +2,7 @@ import React, { useEffect } from 'react';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 import io from 'socket.io-client';
 import './Dictaphone.css';
-import mic from './assets/mic.png'; // si le fichier est à src/assets/mic.jpg
-
+import mic from './assets/mic.png';
 
 const socket = io('https://back-3pxi.onrender.com/');
 
@@ -21,10 +20,10 @@ const Dictaphone = () => {
     socket.emit('send_command', { command });
   };
 
-  // Détection du mot-clé "bottle"
+  // Envoie chaque nouveau transcript au serveur
   useEffect(() => {
-    if (transcript.toLowerCase().includes('bonjour')) {
-      sendCommandToFlask("bonjour");
+    if (transcript.trim() !== '') {
+      sendCommandToFlask(transcript);
       resetTranscript();
     }
   }, [transcript]);
@@ -32,19 +31,19 @@ const Dictaphone = () => {
   if (!browserSupportsSpeechRecognition) {
     return <span>Votre navigateur ne supporte pas la reconnaissance vocale.</span>;
   }
-return (
-  <div className='vocal'>
-    <div className='h'>
-         <img src={mic} alt="Microphone"  width={150} height={150}/>
-      <p>Microphone: {listening ? 'on' : 'off'}</p>
-      </div>    
-    <button onClick={SpeechRecognition.startListening}>Start</button>
-    <button onClick={SpeechRecognition.stopListening}>Stop</button>
-    <button onClick={resetTranscript}>Reset</button>
-    <p>Transcript: {transcript}</p>
-  </div>
-);
 
+  return (
+    <div className='vocal'>
+      <div className='h'>
+        <img src={mic} alt="Microphone" width={150} height={150}/>
+        <p>Microphone: {listening ? 'on' : 'off'}</p>
+      </div>
+      <button onClick={SpeechRecognition.startListening}>Start</button>
+      <button onClick={SpeechRecognition.stopListening}>Stop</button>
+      <button onClick={resetTranscript}>Reset</button>
+      <p>Transcript: {transcript}</p>
+    </div>
+  );
 };
 
 export default Dictaphone;
