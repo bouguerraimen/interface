@@ -4,7 +4,17 @@ import io from 'socket.io-client';
 import './Dictaphone.css';
 import mic from './assets/mic.png';
 
-const socket = io('https://back-3pxi.onrender.com/');
+const socket = io('https://back-3pxi.onrender.com', {
+  transports: ['websocket'], // forcer WebSocket
+  secure: true,
+});
+socket.on('connect', () => {
+  console.log('✅ Connecté au backend');
+});
+
+socket.on('connect_error', (err) => {
+  console.error('❌ Erreur de connexion SocketIO :', err.message);
+});
 
 const Dictaphone = () => {
   const {
